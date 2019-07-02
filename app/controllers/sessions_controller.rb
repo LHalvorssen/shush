@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         if user && user.authenticate(params[:session][:password])
             session[:user_id] = user.id
             flash[:success] = "Access granted"
-            redirect_to root_path
+            redirect_to chatroom_path
         else
             flash.now[:error] = "idiot, you did something wrong... I mean \"Access Denied\""
             render 'new'
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
     def logged_in_redirect
         if logged_in?
             flash[:error] = "Why would you try to do that?"
-            redirect_to root_path
+            redirect_to chatroom_path
         end
     end
 

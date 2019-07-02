@@ -1,5 +1,8 @@
 <%= link_to image_tag("/logo.png"), root_path, class: "item" %>
-<a class="item">Messages</a>
+<% if logged_in? %>
+  <%= link_to "Chatroom", chatroom_path, class: "item" %>
+<%end%>
+
 
 <div class="right menu">
   <% if logged_in? %>
