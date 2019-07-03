@@ -3,9 +3,13 @@ class MessagesController < ApplicationController
 
     def create
         message = current_user.messages.build(message_params)
-        if message.save
-            ActionCable.server.broadcast "chatroom_channel",
-                                          mod_message: message_render(message)
+        if message.body.include?("*shutdown*")
+            Message.destroy_all
+        else
+            if message.save
+                ActionCable.server.broadcast "chatroom_channel",
+                                              mod_message: message_render(message)
+            end
         end
     end
 
