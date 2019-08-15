@@ -83,3 +83,4 @@ production:
   database: shush_production
   username: shush
   password: <%= ENV['SHUSH_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
