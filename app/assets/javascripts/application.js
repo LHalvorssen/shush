@@ -27,6 +27,14 @@ submit_message = function() {
   $('#message_body').on('keydown', function(e){
     if (e.keyCode == 13){
       $('button').click();
+
+      if (e.target.value === '.wipe') {
+        
+        setTimeout(function () {
+
+          window.location.reload();
+        }, 1000);
+      }
       e.target.value = "";
     };
   });

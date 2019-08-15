@@ -5,6 +5,8 @@ class MessagesController < ApplicationController
         message = current_user.messages.build(message_params)
         if message.body.include?(".wipe")
             Message.destroy_all
+            ActionCable.server.broadcast "chatroom_channel",
+                                            mod_message: message_render(message)
         else
             if message.save
                 ActionCable.server.broadcast "chatroom_channel",
@@ -12,7 +14,7 @@ class MessagesController < ApplicationController
             end
         end
 
-        
+
     end
 
 private 
