@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
     def create
         message = current_user.messages.build(message_params)
-        if message.body.include?("*shutdown*")
+        if message.body.include?(".wipe")
             Message.destroy_all
         else
             if message.save

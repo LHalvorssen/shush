@@ -17,6 +17,16 @@ class SessionsController < ApplicationController
         end
     end
 
+    def sign_up
+        user = User.new(user_params) 
+        puts user
+        puts user_params
+        if user.save
+            session[:user_id] = user.id
+            redirect_to chatroom_path;
+        end
+    end
+
     def destroy
         session[:user_id] = nil
         flash[:success] = "When you walk on by, will you call my name"
@@ -30,6 +40,10 @@ class SessionsController < ApplicationController
             flash[:error] = "Why would you try to do that?"
             redirect_to chatroom_path
         end
+    end
+
+    def user_params
+        params.require(:user).permit(:username, :password)
     end
 
 end
