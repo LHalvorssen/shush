@@ -11,15 +11,17 @@ class MessagesController < ApplicationController
                                               mod_message: message_render(message)
             end
         end
+
+        
     end
 
-        private 
-        def message_params
-            params.require(:message).permit(:body)
-        end
-
-        def message_render(message)
-            render(partial: 'message', locals: {message: message})
-            
-        end
+private 
+    def message_params
+        params.require(:message).permit(:body)
     end
+
+    def message_render(message)
+        render(partial: 'message', locals: {message: message})
+        
+    end
+end
